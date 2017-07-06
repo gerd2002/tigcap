@@ -20,7 +20,7 @@
     "electron": "^1.6.11"
   },
   "dependencies": {
-    "interactive-screenshot": "0.0.3",
+    "interactive-screenshot": "0.0.4",
     "snekfetch": "^3.2.2"
   }
 }
