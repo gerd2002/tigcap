@@ -3,7 +3,7 @@ const {app, Menu, Tray, globalShortcut, clipboard, BrowserWindow, Notification} 
 let os = require("os")
 let snekfetch = require("snekfetch")
 
-app.dock.hide()
+if(app.dock) app.dock.hide()
 
 let win = null
 async function showSettingsWindow() {
@@ -26,6 +26,7 @@ let tray = null
 app.on('ready', function() {
   tray = new Tray('icon.png')
   const contextMenu = Menu.buildFromTemplate([
+    {label: "Take screenshot", click: takeScreenshot},
     {label: "My account", click: showAccountWindow},
     {label: "Settings", click: showSettingsWindow},
     {type: "separator"},
