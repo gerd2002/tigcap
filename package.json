@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/Mstrodl/tigcap#readme",
   "devDependencies": {
-    "electron": "^1.6.11"
+    "electron": "^1.7.4"
   },
   "dependencies": {
     "interactive-screenshot": "0.0.4",
