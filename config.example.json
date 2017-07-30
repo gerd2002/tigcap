@@ -1,0 +1,8 @@
+{
+  "img_host": "tig",
+  "srht_url": "https://srht.example.org",
+  "srht_key": "Example",
+  "pomf_host": ["https://pomf.example.org/", "https://pomf-vanity.example.org/"],
+  "owoToken": "",
+  "owoUrl": "https://owo.whats-th.is/"
+}

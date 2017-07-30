@@ -3,12 +3,7 @@ const {app, Menu, Tray, globalShortcut, clipboard, BrowserWindow, Notification} 
 let os = require("os")
 let snekfetch = require("snekfetch")
 
-let config = {
-  img_host: "pomf",
-  srht_url: "https://example.org",
-  srht_key: "Benis",
-//  pomf_host: ["https://example.org/pomf/", "https://example.org/uploads/"]
-}
+let config = require("./config.json")
 
 if(app.dock) app.dock.hide()
 
@@ -66,6 +61,11 @@ async function takeScreenshot() {
       }
       case "srht": {
         url = await srhtUpload(buffer)
+        break
+      }
+      case "owo": {
+        url = await owoUpload(buffer)
+        break
       }
     }
     clipboard.writeText(url)
@@ -108,6 +108,12 @@ async function pomfUpload(buffer) {
   if(!body.success) throw "Unknown error"
   if(!body.files[0].url.match(new RegExp(picked[1], "gi"))) return picked[1] + body.files[0].url
   else return body.files[0].url
+}
+
+async function owoUpload(buffer) {
+  let res = await snekfetch.post(`https://api.awau.moe/upload/pomf`).attach("files[]", buffer, "oof.png").set({authorization: config.owoToken})
+  let url = `${config.owoUrl || "https://owo.whats-th.is/"}${res.body.files[0].url}`
+  return url
 }
 
 async function tigUpload(buffer) {
