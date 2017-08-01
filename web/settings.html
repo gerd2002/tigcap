@@ -1,17 +1,126 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TIGCap &middot; Settings</title>
+    <title>TIGCap Settings</title>
     <script>
-      document.addEventListener("load", function() {
-        let screenshotBtn = document.getElementById("screenshot-key-combo-btn")
-        screenshotBtn.addEventListener("click", function() {
-
+    var ipcRenderer = require("electron").ipcRenderer
+      var oldConfig = config = require("../config.json")
+      var fs = require("fs")
+      window.addEventListener("load", function() {
+        var imgHostSelector = document.getElementById("img-host")
+        imgHostSelector.addEventListener("change", function() {
+          config.img_host = this.value
+          reloadValues()
         })
+        var body = document.getElementById("body")
+        var srht_url = document.getElementById("srht_url")
+        var srht_key = document.getElementById("srht_key")
+        var pomf_host_server = document.getElementById("pomf_host_server")
+        var pomf_host_vanity = document.getElementById("pomf_host_vanity")
+        var owo_token = document.getElementById("owo_token")
+        var owo_url = document.getElementById("owo_url")
+        srht_url.addEventListener("change", function() {
+          config.srht_url = this.value
+          save()
+        })
+        srht_key.addEventListener("change", function() {
+          config.srht_key = this.value
+          save()
+        })
+        pomf_host_server.addEventListener("change", function() {
+          config.pomf_host[0] = this.value
+          save()
+        })
+        pomf_host_vanity.addEventListener("change", function() {
+          config.pomf_host[1] = this.value
+          save()
+        })
+        owo_token.addEventListener("change", function() {
+          config.owoToken = this.value
+          save()
+        })
+        owo_url.addEventListener("change", function() {
+          config.owoUrl = this.value
+          save()
+        })
+        function reloadValues() {
+          srht_url.value = config.srht_url
+          srht_key.value = config.srht_key
+          pomf_host_server.value = config.pomf_host[0]
+          pomf_host_vanity.value = config.pomf_host[1]
+          owo_token.value = config.owoToken
+          owo_url.value = config.owoUrl
+          body.classList = config.img_host
+          imgHostSelector.value = config.img_host
+          save()
+        }
+        window.reloadValues = reloadValues
+        reloadValues()
       })
+      function save() {
+        oldConfig = config
+        fs.writeFile(__dirname + "/../config.json", JSON.stringify(config), {flag: "w"}, function(err, oof) {
+          console.log(err, oof)
+          if(err) throw err
+          console.log("Saved!")
+          ipcRenderer.send("reload", JSON.stringify(config))
+        })
+      }
+
       </script>
+      <style>
+      .srht_only {
+        display: none;
+      }
+      .srht .srht_only {
+        display: inline;
+      }
+      .pomf_only {
+        display: none;
+      }
+      .pomf .pomf_only {
+        display: inline;
+      }
+      .owo_only {
+        display: none;
+      }
+      .owo .owo_only {
+        display: inline;
+      }
+      input[type="text"],
+      input[type="password"] {
+        padding: 5px 2px;
+        width: calc(100% - 10px);
+      }
+      #img-host {
+        padding: 5px 2px;
+        width: calc(100% - 5px);
+        height: 20px;
+      }
+      </style>
   </head>
-  <body>
-    Take screenshot <button id="screenshot-key-combo-btn"></button>
+  <body id="body">
+    <label for="img-host">Upload to Service</label>
+    <select id="img-host">
+      <option value="pomf">Pomf</option>
+      <option value="tig">The Image Guru</option>
+      <option value="srht">SRHT</option>
+      <option value="owo">OwO</option>
+    </select>
+    <br>
+    <label class="srht_only" for="srht_url">SRHT URL</label><br class="srht_only">
+    <input class="srht_only" type="text" id="srht_url" value="Please Wait"></input><br class="srht_only">
+    <label class="srht_only" for="srht_key">SRHT Key</label><br class="srht_only">
+    <input class="srht_only" type="password" id="srht_key" value="Please Wait"></input>
+
+    <label class="pomf_only" for="pomf_host_server">POMF Server</label><br class="pomf_only">
+    <input class="pomf_only" id="pomf_host_server" type="text" value="Please Wait"></input><br class="pomf_only">
+    <label class="pomf_only" for="pomf_host_vanity">POMF Vanity URL</label><br class="pomf_only">
+    <input class="pomf_only" id="pomf_host_vanity" type="text" value="Please Wait"></input>
+
+    <label class="owo_only" for="owo_token">OwO Token</label><br class="owo_only">
+    <input class="owo_only" id="owo_token" type="password" value="Please Wait"></input><br class="owo_only">
+    <label class="owo_only" for="owo_url">OwO Vanity URL</label><br class="owo_only">
+    <input class="owo_only" id="owo_url" type="text" value="Please Wait"></input>
   </body>
 </html>

@@ -1,5 +1,5 @@
 let capture = require("interactive-screenshot").capture
-const {app, Menu, Tray, globalShortcut, clipboard, BrowserWindow, Notification} = require("electron")
+const {app, Menu, Tray, globalShortcut, clipboard, BrowserWindow, Notification, ipcMain} = require("electron")
 let os = require("os")
 let snekfetch = require("snekfetch")
 
@@ -7,13 +7,18 @@ let config = require("./config.json")
 
 if(app.dock) app.dock.hide()
 
+ipcMain.on("reload", function(event, cfg) {
+  console.log("Reloading...")
+  config = JSON.parse(cfg)
+})
+
 let win = null
 async function showSettingsWindow() {
   // if(win) win.close()
-  win = new BrowserWindow({ width: 200, height: 200 })
+  win = new BrowserWindow({ width: 500, height: 500 })
   win.show()
   win.focus()
-  win.loadURL("web/settings.html")
+  win.loadURL("file://" + __dirname + "/web/settings.html")
 }
 
 async function showAccountWindow() {
@@ -21,7 +26,7 @@ async function showAccountWindow() {
   win = new BrowserWindow({ width: 800, height: 600 })
   win.show()
   win.focus()
-  win.loadURL("web/account.html")
+  win.loadURL("file://" + __dirname + "/web/account.html")
 }
 
 let tray = null
@@ -123,4 +128,10 @@ async function tigUpload(buffer) {
 
 app.on("window-all-closed", function() {
   // Ignore it
+})
+
+app.on("browser-window-created", function(e, window) {
+  console.log(window.webContents)
+  window.setMenu(null)
+  window.webContents.openDevTools({detach:true}) // This will be gone in production
 })
