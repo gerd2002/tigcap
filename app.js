@@ -129,9 +129,3 @@ async function tigUpload(buffer) {
 app.on("window-all-closed", function() {
   // Ignore it
 })
-
-app.on("browser-window-created", function(e, window) {
-  console.log(window.webContents)
-  window.setMenu(null)
-  window.webContents.openDevTools({detach:true}) // This will be gone in production
-})
