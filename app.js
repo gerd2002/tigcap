@@ -15,7 +15,7 @@ ipcMain.on("reload", function(event, cfg) {
 let win = null
 async function showSettingsWindow() {
   // if(win) win.close()
-  win = new BrowserWindow({ width: 500, height: 500 })
+  win = new BrowserWindow({width: 500, height: 500})
   win.show()
   win.focus()
   win.loadURL("file://" + __dirname + "/web/settings.html")
@@ -23,15 +23,15 @@ async function showSettingsWindow() {
 
 async function showAccountWindow() {
   // if(win) win.close()
-  win = new BrowserWindow({ width: 800, height: 600 })
+  win = new BrowserWindow({width: 800, height: 600})
   win.show()
   win.focus()
   win.loadURL("file://" + __dirname + "/web/account.html")
 }
 
 let tray = null
-app.on('ready', function() {
-  tray = new Tray('resources/iconTemplate.png')
+app.on("ready", function() {
+  tray = new Tray("resources/iconTemplate.png")
   const contextMenu = Menu.buildFromTemplate([
     {label: "Take screenshot", click: takeScreenshot},
     {label: "My account", click: showAccountWindow},
@@ -39,13 +39,13 @@ app.on('ready', function() {
     {type: "separator"},
     {label: "Quit", role: "quit"}
   ])
-  const keyboardShortcut = os.platform === 'darwin' ? '⇧⌘C' : 'Ctrl-Shift-C'
+  const keyboardShortcut = os.platform === "darwin" ? "⇧⌘C" : "Ctrl-Shift-C"
   tray.setToolTip(`Press ${keyboardShortcut} to take a screenshot`)
   tray.setContextMenu(contextMenu)
-  const screenshotShortcut = globalShortcut.register('CommandOrControl+Shift+C', takeScreenshot)
+  globalShortcut.register("CommandOrControl+Shift+C", takeScreenshot)
 })
 
-app.on('will-quit', function() {
+app.on("will-quit", function() {
   globalShortcut.unregisterAll()
 })
 
@@ -107,7 +107,7 @@ async function pomfUpload(buffer) {
 }
 
 async function owoUpload(buffer) {
-  let res = await snekfetch.post(`https://api.awau.moe/upload/pomf`).attach("files[]", buffer, "oof.png").set({authorization: config.owoToken})
+  let res = await snekfetch.post("https://api.awau.moe/upload/pomf").attach("files[]", buffer, "oof.png").set({authorization: config.owoToken})
   let url = `${config.owoUrl || "https://owo.whats-th.is/"}${res.body.files[0].url}`
   return url
 }
