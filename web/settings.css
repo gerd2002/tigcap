@@ -1,0 +1,28 @@
+.srht_only {
+  display: none;
+}
+.srht .srht_only {
+  display: inline;
+}
+.pomf_only {
+  display: none;
+}
+.pomf .pomf_only {
+  display: inline;
+}
+.owo_only {
+  display: none;
+}
+.owo .owo_only {
+  display: inline;
+}
+input[type="text"],
+input[type="password"] {
+  padding: 5px 2px;
+  width: calc(100% - 10px);
+}
+#img-host {
+  padding: 5px 2px;
+  width: calc(100% - 5px);
+  height: 20px;
+}
