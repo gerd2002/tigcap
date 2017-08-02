@@ -4,20 +4,22 @@
   "description": "An electron-based screenshotter made for The Image Guru",
   "main": "app.js",
   "scripts": {
-    "start": "node_modules/.bin/electron app.js"
+    "start": "electron app.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Mstrodl/tigcap.git"
+    "url": "git+https://github.com/theimgguru/tigcap.git"
   },
   "author": "heatingdevice",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/Mstrodl/tigcap/issues"
+    "url": "https://github.com/theimgguru/tigcap/issues"
   },
-  "homepage": "https://github.com/Mstrodl/tigcap#readme",
+  "homepage": "https://github.com/theimgguru/tigcap#readme",
   "devDependencies": {
-    "electron": "^1.7.4"
+    "babel-eslint": "^7.2.3",
+    "electron": "^1.7.4",
+    "eslint": "^4.3.0"
   },
   "dependencies": {
     "interactive-screenshot": "0.0.4",

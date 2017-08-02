@@ -6,27 +6,48 @@
     <link rel="stylesheet" href="settings.css"></link>
   </head>
   <body id="body">
-    <label for="img-host">Upload to Service</label>
-    <select id="img-host">
-      <option value="pomf">Pomf</option>
-      <option value="tig">The Image Guru</option>
-      <option value="srht">SRHT</option>
-      <option value="owo">OwO</option>
-    </select>
-    <br>
-    <label class="srht_only" for="srht_url">SRHT URL</label><br class="srht_only">
-    <input class="srht_only" type="text" id="srht_url" value="Please Wait"></input><br class="srht_only">
-    <label class="srht_only" for="srht_key">SRHT Key</label><br class="srht_only">
-    <input class="srht_only" type="password" id="srht_key" value="Please Wait"></input>
+    <section id="service-picker">
+    <label for="img-host" id="img-host-label">Upload to Service</label>
+      <select id="img-host">
+        <option value="pomf">Pomf</option>
+        <option value="tig">The Image Guru</option>
+        <option value="srht">SRHT</option>
+        <option value="owo">OwO</option>
+      </select>
+      <br>
+    </section>
 
-    <label class="pomf_only" for="pomf_host_server">POMF Server</label><br class="pomf_only">
-    <input class="pomf_only" id="pomf_host_server" type="text" value="Please Wait"></input><br class="pomf_only">
-    <label class="pomf_only" for="pomf_host_vanity">POMF Vanity URL</label><br class="pomf_only">
-    <input class="pomf_only" id="pomf_host_vanity" type="text" value="Please Wait"></input>
+    <div class="srht_only">
+      <div class="form-group">
+        <label for="srht_url">SRHT URL</label><br class="srht_only">
+        <input type="text" id="srht_url" value="Please Wait"></input><br class="srht_only">
+      </div>
+      <div class="form-group">
+        <label for="srht_key">SRHT Key</label><br class="srht_only">
+        <input type="password" id="srht_key" value="Please Wait"></input>
+      </div>
+    </div>
 
-    <label class="owo_only" for="owo_token">OwO Token</label><br class="owo_only">
-    <input class="owo_only" id="owo_token" type="password" value="Please Wait"></input><br class="owo_only">
-    <label class="owo_only" for="owo_url">OwO Vanity URL</label><br class="owo_only">
-    <input class="owo_only" id="owo_url" type="text" value="Please Wait"></input>
+    <div class="pomf_only">
+      <div class="form-group">
+        <label for="pomf_host_server">POMF Server</label><br class="pomf_only">
+        <input id="pomf_host_server" type="text" value="Please Wait"></input><br class="pomf_only">
+      </div>
+      <div class="form-group">
+        <label for="pomf_host_vanity">POMF Vanity URL</label><br class="pomf_only">
+        <input id="pomf_host_vanity" type="text" value="Please Wait"></input>
+      </div>
+    </div>
+
+    <div class="owo_only">
+      <div class="form-group">
+        <label for="owo_token">OwO Token</label><br class="owo_only">
+        <input id="owo_token" type="password" value="Please Wait"></input><br class="owo_only">
+      </div>
+      <div class="form-group">
+        <label for="owo_url">OwO Vanity URL</label><br class="owo_only">
+        <input id="owo_url" type="text" value="Please Wait"></input>
+      </div>
+    </div>
   </body>
 </html>
