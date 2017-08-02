@@ -48,6 +48,13 @@ app.on('will-quit', function() {
   globalShortcut.unregisterAll()
 })
 
+const hostMap = {
+  pomf: pomfUpload,
+  tig: tigUpload,
+  srht: srhtUpload,
+  owo: owoUpload
+}
+
 async function takeScreenshot() {
   console.log("Keypress")
   try {
@@ -55,24 +62,7 @@ async function takeScreenshot() {
     if(!buffer) return false // The user canceled the screenshot
     console.log("Captured")
     let url = null
-    switch(config.img_host) {
-      case "pomf": {
-        url = await pomfUpload(buffer)
-        break
-      }
-      case "tig": {
-        url = await tigUpload(buffer)
-        break
-      }
-      case "srht": {
-        url = await srhtUpload(buffer)
-        break
-      }
-      case "owo": {
-        url = await owoUpload(buffer)
-        break
-      }
-    }
+    url = await hostMap[config.img_host](buffer)
     clipboard.writeText(url)
     console.log(`Uploaded as ${url}`)
     new Notification({
