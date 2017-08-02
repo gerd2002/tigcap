@@ -39,7 +39,8 @@ app.on('ready', function() {
     {type: "separator"},
     {label: "Quit", role: "quit"}
   ])
-  tray.setToolTip(`Press ${os.platform == "darwin" ? "Command" : "Ctrl"}-Shift-C to take a screenshot`)
+  const keyboardShortcut = os.platform === 'darwin' ? '⇧⌘C' : 'Ctrl-Shift-C'
+  tray.setToolTip(`Press ${keyboardShortcut} to take a screenshot`)
   tray.setContextMenu(contextMenu)
   const screenshotShortcut = globalShortcut.register('CommandOrControl+Shift+C', takeScreenshot)
 })
