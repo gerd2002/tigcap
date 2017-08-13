@@ -19,7 +19,7 @@
   "homepage": "https://github.com/theimgguru/tigcap#readme",
   "devDependencies": {
     "babel-eslint": "^7.2.3",
-    "electron": "^1.7.4",
+    "electron": "^1.7.6",
     "electron-packager": "^8.7.2",
     "eslint": "^4.3.0"
   },
