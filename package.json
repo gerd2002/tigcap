@@ -4,7 +4,8 @@
   "description": "An electron-based screenshotter made for The Image Guru",
   "main": "app.js",
   "scripts": {
-    "start": "electron app.js"
+    "start": "electron app.js",
+    "package": "electron-packager . TIGCap --all --no-prune --asar --out out"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
   "devDependencies": {
     "babel-eslint": "^7.2.3",
     "electron": "^1.7.4",
+    "electron-packager": "^8.7.2",
     "eslint": "^4.3.0"
   },
   "dependencies": {
