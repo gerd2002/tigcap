@@ -1,9 +1,25 @@
 let capture = require("interactive-screenshot").capture
 const {app, Menu, Tray, globalShortcut, clipboard, BrowserWindow, Notification, ipcMain} = require("electron")
 let os = require("os")
+let fs = require("fs")
 let snekfetch = require("snekfetch")
 
-let config = require("./config.json")
+let defaultConfig = {
+  "img_host": "tig",
+  "srht_url": "https://srht.example.org",
+  "srht_key": "Example",
+  "pomf_host": ["https://pomf.example.org/", "https://pomf-vanity.example.org/"],
+  "owoToken": "",
+  "owoUrl": "https://owo.whats-th.is/"
+}
+
+let config
+
+try {
+  config = require(`${app.getPath("userData")}/config.json`)
+} catch(e) {
+  config = defaultConfig
+}
 
 if(app.dock) app.dock.hide()
 

@@ -1,5 +1,20 @@
-var ipcRenderer = require("electron").ipcRenderer
-var oldConfig = config = require("../config.json")
+var {ipcRenderer, remote} = require("electron")
+
+var config
+
+try {
+  config = require(getAppDir() + "/config.json")
+} catch(e) {
+  config = {
+    "img_host": "tig",
+    "srht_url": "https://srht.example.org",
+    "srht_key": "Example",
+    "pomf_host": ["https://pomf.example.org/", "https://pomf-vanity.example.org/"],
+    "owoToken": "",
+    "owoUrl": "https://owo.whats-th.is/"
+  }
+}
+
 var fs = require("fs")
 window.addEventListener("load", function() {
   var imgHostSelector = document.getElementById("img-host")
@@ -54,10 +69,14 @@ window.addEventListener("load", function() {
 })
 function save() {
   oldConfig = config
-  fs.writeFile(__dirname + "/../config.json", JSON.stringify(config), {flag: "w"}, function(err, oof) {
+  fs.writeFile(getAppDir() + "/config.json", JSON.stringify(config), {flag: "w"}, function(err, oof) {
     console.log(err, oof)
     if(err) throw err
     console.log("Saved!")
     ipcRenderer.send("reload", JSON.stringify(config))
   })
+}
+
+function getAppDir() {
+  return remote.app.getPath("userData")
 }
