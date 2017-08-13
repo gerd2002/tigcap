@@ -47,7 +47,7 @@ async function showAccountWindow() {
 
 let tray = null
 app.on("ready", function() {
-  tray = new Tray("resources/iconTemplate.png")
+  tray = new Tray(__dirname + "resources/iconTemplate.png")
   const contextMenu = Menu.buildFromTemplate([
     {label: "Take screenshot", click: takeScreenshot},
     {label: "My account", click: showAccountWindow},
