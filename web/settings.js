@@ -11,7 +11,8 @@ try {
     "srht_key": "Example",
     "pomf_host": ["https://pomf.example.org/", "https://pomf-vanity.example.org/"],
     "owoToken": "",
-    "owoUrl": "https://owo.whats-th.is/"
+    "owoUrl": "https://owo.whats-th.is/",
+    "shortcut": "CommandOrControl+Shift+C"
   }
 }
 
@@ -29,6 +30,8 @@ window.addEventListener("load", function() {
   var pomf_host_vanity = document.getElementById("pomf_host_vanity")
   var owo_token = document.getElementById("owo_token")
   var owo_url = document.getElementById("owo_url")
+  var shortcut_text = document.getElementById("shortcut_text")
+
   srht_url.addEventListener("change", function() {
     config.srht_url = this.value
     save()
@@ -53,6 +56,11 @@ window.addEventListener("load", function() {
     config.owoUrl = this.value
     save()
   })
+  shortcut_text.addEventListener("change", function() {
+    config.shortcut = this.value
+    save()
+  })
+
   function reloadValues() {
     srht_url.value = config.srht_url
     srht_key.value = config.srht_key
@@ -62,13 +70,13 @@ window.addEventListener("load", function() {
     owo_url.value = config.owoUrl
     body.classList = config.img_host
     imgHostSelector.value = config.img_host
+    shortcut_text.value = config.shortcut || "CommandOrControl+Shift+C"
     save()
   }
   window.reloadValues = reloadValues
   reloadValues()
 })
 function save() {
-  oldConfig = config
   fs.writeFile(getAppDir() + "/config.json", JSON.stringify(config), {flag: "w"}, function(err, oof) {
     console.log(err, oof)
     if(err) throw err

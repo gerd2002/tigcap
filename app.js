@@ -1,8 +1,8 @@
 let capture = require("interactive-screenshot").capture
 const {app, Menu, Tray, globalShortcut, clipboard, BrowserWindow, Notification, ipcMain} = require("electron")
 let os = require("os")
-let fs = require("fs")
 let snekfetch = require("snekfetch")
+
 
 let defaultConfig = {
   "img_host": "tig",
@@ -10,7 +10,8 @@ let defaultConfig = {
   "srht_key": "Example",
   "pomf_host": ["https://pomf.example.org/", "https://pomf-vanity.example.org/"],
   "owoToken": "",
-  "owoUrl": "https://owo.whats-th.is/"
+  "owoUrl": "https://owo.whats-th.is/",
+  "shortcut": "CommandOrControl+Shift+C"
 }
 
 let config
@@ -26,6 +27,13 @@ if(app.dock) app.dock.hide()
 ipcMain.on("reload", function(event, cfg) {
   console.log("Reloading...")
   config = JSON.parse(cfg)
+  globalShortcut.unregisterAll()
+  try {
+    globalShortcut.register(config.shortcut, takeScreenshot)
+  } catch(e) {
+    console.log(e)
+    globalShortcut.register("CommandOrControl+Shift+C", takeScreenshot)
+  }
 })
 
 let win = null
@@ -58,7 +66,12 @@ app.on("ready", function() {
   const keyboardShortcut = os.platform === "darwin" ? "⇧⌘C" : "Ctrl-Shift-C"
   tray.setToolTip(`Press ${keyboardShortcut} to take a screenshot`)
   tray.setContextMenu(contextMenu)
-  globalShortcut.register("CommandOrControl+Shift+C", takeScreenshot)
+  try {
+    globalShortcut.register(config.shortcut, takeScreenshot)
+  } catch(e) {
+    console.log(e)
+    globalShortcut.register("CommandOrControl+Shift+C", takeScreenshot)
+  }
 })
 
 app.on("will-quit", function() {
