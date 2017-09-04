@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=0.0.1
+Name=TIGCap
+Comment=A powerful screenshot program
+Path=/opt/tigcap
+Exec=/opt/tigcap/TIGCap
+Icon=camera-photo
+
+Terminal=false
+
+Categories=Utilities
