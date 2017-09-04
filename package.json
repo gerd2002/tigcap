@@ -24,7 +24,7 @@
     "eslint": "^4.3.0"
   },
   "dependencies": {
-    "interactive-screenshot": "0.0.4",
-    "snekfetch": "^3.2.2"
+    "interactive-screenshot": "0.0.5",
+    "snekfetch": "^3.3.0"
   }
 }
