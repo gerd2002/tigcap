@@ -23,6 +23,8 @@ html, body {
 .pomf .pomf_only { display: inline; }
 .owo_only { display: none; }
 .owo .owo_only { display: inline; }
+.nothingdomains_only { display: none; }
+.nothingdomains .nothingdomains_only { display: inline; }
 
 .form-group {
   margin-bottom: 0.5rem;

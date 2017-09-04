@@ -31,7 +31,18 @@ window.addEventListener("load", function() {
   var owo_token = document.getElementById("owo_token")
   var owo_url = document.getElementById("owo_url")
   var shortcut_text = document.getElementById("shortcut_text")
+  var nothingdomains_vanity = document.getElementById("nothingdomains_vanity")
+  var nothingdomains_key = document.getElementById("nothingdomains_key")
 
+
+  nothingdomains_key.addEventListener("change", function() {
+    config.nothingdomains_key = this.value
+    save()
+  })
+  nothingdomains_vanity.addEventListener("change", function() {
+    config.nothingdomains_vanity = this.value
+    save()
+  })
   srht_url.addEventListener("change", function() {
     config.srht_url = this.value
     save()
@@ -71,6 +82,8 @@ window.addEventListener("load", function() {
     body.classList = config.img_host
     imgHostSelector.value = config.img_host
     shortcut_text.value = config.shortcut || "CommandOrControl+Shift+C"
+    nothingdomains_key.value = config.nothingdomains_key
+    nothingdomains_vanity.value = config.nothingdomains_vanity
     save()
   }
   window.reloadValues = reloadValues
