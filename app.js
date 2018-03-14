@@ -111,24 +111,23 @@ const hostMap = {
   tig: tigUpload,
   srht: srhtUpload,
   owo: owoUpload,
-  nothingdomains: nothingDomainsUpload
+  nothingdomains: nothingDomainsUpload,
+  elixire: elixireUpload
 }
 
 async function takeScreenshot() {
-  console.log("Keypress")
   try {
     let buffer = await capture()
     if(!buffer) return false // The user canceled the screenshot
-    console.log("Captured")
     let url = null
     url = await hostMap[config.img_host](buffer)
     clipboard.writeText(url)
     console.log(`Uploaded as ${url}`)
-    new Notification({
+    /*new Notification({
       title: "TIGCap",
       body: "Link to screenshot copied to clipboard!",
       silent: true
-    }).show()
+    }).show()*/
   } catch(e) {
     // Ignore errors about not running two at once
     if(e.includes && e.includes("screencapture: cannot run two interactive screen captures at a time")) return
@@ -157,6 +156,22 @@ async function nothingDomainsUpload(buffer) {
   }
   if(!body.success) throw "Unknown error"
   return `${vanity}${body.files[0].url}`
+}
+
+async function elixireUpload(buffer) {
+  let res
+  try {
+    res = await snekfetch.post("https://fuck-ya.ml/api/upload").attach("f[]", buffer, "oof.png").set({
+      Authorization: config.elixire_key
+    })
+  } catch (e) {
+    console.log(e)
+  }
+  let body = res.body
+  if(res.body instanceof Buffer) {
+    body = JSON.parse(res.body.toString("utf8"))
+  }
+  return `${body.url}`
 }
 
 async function pomfUpload(buffer) {
