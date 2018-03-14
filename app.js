@@ -123,11 +123,11 @@ async function takeScreenshot() {
     url = await hostMap[config.img_host](buffer)
     clipboard.writeText(url)
     console.log(`Uploaded as ${url}`)
-    /*new Notification({
+    new Notification({
       title: "TIGCap",
       body: "Link to screenshot copied to clipboard!",
       silent: true
-    }).show()*/
+    }).show()
   } catch(e) {
     // Ignore errors about not running two at once
     if(e.includes && e.includes("screencapture: cannot run two interactive screen captures at a time")) return
@@ -161,7 +161,7 @@ async function nothingDomainsUpload(buffer) {
 async function elixireUpload(buffer) {
   let res
   try {
-    res = await snekfetch.post("https://fuck-ya.ml/api/upload").attach("f[]", buffer, "oof.png").set({
+    res = await snekfetch.post("https://elixi.re/api/upload").attach("f[]", buffer, "oof.png").set({
       Authorization: config.elixire_key
     })
   } catch (e) {
